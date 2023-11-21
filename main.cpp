@@ -78,6 +78,7 @@ int main() {
 
     std::cout << "The total from multiplying each element in the stack is ";
     stack2.pop(catchvar);
+
     std::cout << catchvar << std::endl;
     return 0;
 }

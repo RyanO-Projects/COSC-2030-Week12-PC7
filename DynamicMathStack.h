@@ -127,12 +127,31 @@ void MathStack::div() {
 }
 
 void MathStack::addAll() {;
-    int *stackCopy = new int[stackSize];
+    int sum = 0;
 
+    if(isEmpty()) {
+        std::cout << "Not enough values in stack.\n";
+        return;
+    }
     for (int i = 0; i < stackSize; i++) {
-        stackCopy[i] = stackArray[i];
+        sum += stackArray[i];
         pop(stackArray[i]);
     }
+    push(sum);
+}
+
+void MathStack::multAll() {
+    int multSum = 1;
+
+    if(isEmpty()) {
+        std::cout << "Not enough values in stack.\n";
+        return;
+    }
+    for(int i = 0; i < stackSize; i++) {
+        multSum *= stackArray[i];
+        pop(stackArray[i]);
+    }
+    push(multSum);
 }
 
 #endif

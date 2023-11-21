@@ -3,7 +3,9 @@
 int main() {
     int catchvar;
 
-    MathStack stack1(5);
+    MathStack stack1(2);
+    MathStack stack2(9);
+    MathStack stack3(20);
 
     // Testing sum function;
     std::cout << "Pushing 1:\n";
@@ -56,26 +58,26 @@ int main() {
     // Testing addAll function
     std::cout << "Pushing 1 through 20:\n";
     for(int i = 0; i < 20; i++) {
-        stack1.push(i);
+        stack3.push(i);
     }
 
-    stack1.addAll();
+    stack3.addAll();
 
     std::cout << "The sum of the stack is ";
-    stack1.pop(catchvar);
+    stack3.pop(catchvar);
     std::cout << catchvar << std::endl;
 
     // Testing multAll function
     std::cout << "Pushing even numbers from 1 through 20 (excluding 20):\n";
 
     for(int i = 2; i < 20; i += 2) {
-        stack1.push(i);
+        stack2.push(i);
     }
 
-    stack1.multAll();
+    stack2.multAll();
 
     std::cout << "The total from multiplying each element in the stack is ";
-    stack1.pop(catchvar);
+    stack2.pop(catchvar);
     std::cout << catchvar << std::endl;
     return 0;
 }

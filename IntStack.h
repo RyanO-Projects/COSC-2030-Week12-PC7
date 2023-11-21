@@ -29,6 +29,10 @@ class IntStack {
             top = obj.top;
         };
 
+        int getStackSize() const {
+            return stackSize;
+        };
+
         ~IntStack() {
             delete [] stackArray;
         };

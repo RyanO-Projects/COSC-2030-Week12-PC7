@@ -1,11 +1,37 @@
 #ifndef DYNAMICMATHSTACK_H
 #define DYNAMICMATHSTACK_H
-#include "IntStack.h"
+#include <iostream>
 
-class MathStack : public IntStack {
+class MathStack {
+    private :
+        int *stackArray;
+        int stackSize;
+        int top;
+
     public:
-        MathStack(int s) : IntStack(s) {}
+        MathStack(int size) {
+            stackSize = size;
+            stackArray = new int[stackSize];
+            top = -1;
+        };
 
+        MathStack(const MathStack &obj) {
+            if (obj.stackSize > 0)
+                stackArray = new int[obj.stackSize];
+            else
+                stackArray = nullptr;
+
+            stackSize = obj.stackSize;
+
+            for (int count = 0; count < stackSize; count++)
+                stackArray[count] = obj.stackArray[count];
+            
+            top = obj.top;
+        }
+        void push(int);
+        void pop(int &);
+        bool isFull() const;
+        bool isEmpty() const;
         void add();
         void sub();
         void mult();
@@ -14,52 +40,99 @@ class MathStack : public IntStack {
         void multAll();
 };
 
+void MathStack::push(int num) {
+    if (isFull())
+        std::cout << "The stack is full.\n";
+
+    else {
+        top++;
+        stackArray[top] = num;
+    }
+}
+
+void MathStack::pop(int &num) {
+    if (isEmpty())
+        std::cout << "The stack is empty.\n";
+
+    else {
+        num = stackArray[top];
+        top--;
+    }
+}
+
+bool MathStack::isFull() const {
+    if (top == stackSize -1)
+        return true;
+    else
+        return false; 
+}
+
+bool MathStack::isEmpty() const {
+    if (top == -1)
+        return true;
+    else
+        return false;
+}
+
 void MathStack::add() {
     int num, sum;
 
-    pop(sum);
-    pop(num);
-
-    sum += num;
-
-    push(sum);
+    if(stackSize > 1) {
+        pop(sum);
+        pop(num);
+        sum += num;
+        push(sum);
+    }
+    else
+        std::cout << "Not enough values in stack.\n";
 }
 
 void MathStack::sub() {
     int num, diff;
 
-    pop(diff);
-    pop(num);
-
-    diff -= num;
-
-    push(diff);
+    if(stackSize > 1) {
+        pop(diff);
+        pop(num);
+        diff -= num;
+        push(diff);
+    }
+    else
+        std::cout << "Not enough values in stack.\n";
 }
 
 void MathStack::mult() {
     int num, multiplier;
 
-    pop(num);
-    pop(multiplier);
-
-    num *= multiplier;
-
-    push(multiplier);
+    if(stackSize > 1) {
+        pop(num);
+        pop(multiplier);
+        num *= multiplier;
+        push(multiplier);
+    }
+    else
+        std::cout << "Not enough values in stack.\n";
 }
 
 void MathStack::div() {
     int num, divisor;
 
-    pop(num);
-    pop(divisor);
-
-    num /= divisor;
-
-    push(divisor);
+    if(stackSize > 1) {
+        pop(num);
+        pop(divisor);
+        num /= divisor;
+        push(divisor);
+    }
+    else
+        std::cout << "Not enough values in stack.\n";
 }
 
-void MathStack::addAll() {
+void MathStack::addAll() {;
     int *stackCopy = new int[stackSize];
+
+    for (int i = 0; i < stackSize; i++) {
+        stackCopy[i] = stackArray[i];
+        pop(stackArray[i]);
+    }
 }
 
 #endif
